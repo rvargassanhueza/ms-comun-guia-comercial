@@ -1,0 +1,946 @@
+{
+	"info": {
+		"_postman_id": "b84b8d9c-f58f-413e-91a9-dc521a85c157",
+		"name": "ms-comun-cooperativa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sucursal",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/sucursal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/sucursal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"sucursal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/sucursal/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/sucursal/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"sucursal",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/sucursal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_sucursal\":\"Sucursal Test\",\n\t\"descripcion_sucursal\":\"Sucursal Test\",\n\t\"id_comuna\":122,\n\t\"id_concesionaria\":\"5\",\n\t\"direccion_sucursal\":\"Sucursal Test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/sucursal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"sucursal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/sucursal/32",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_sucursal\":\"Sucursal Test Modificado\",\n\t\"descripcion_sucursal\":\"Sucursal Test Modificado\",\n\t\"id_comuna\":155,\n\t\"id_concesionaria\":6,\n\t\"direccion_sucursal\":\"Sucursal Test Modificado\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/sucursal/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"sucursal",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/sucursal/32",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/sucursal/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"sucursal",
+								"32"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "concesionaria",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/concesionaria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/concesionaria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"concesionaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/concesionaria/5",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/concesionaria/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"concesionaria",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/concesionaria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_concesionaria\":\"concesionaria test\",\n\t\"descripcion_concesionaria\":\"concesionaria test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/concesionaria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"concesionaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/concesionaria/18",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_concesionaria\":\"concesionaria test modificado\",\n\t\"descripcion_concesionaria\":\"concesionaria test modificado\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/concesionaria/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"concesionaria",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/concesionaria/18",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/concesionaria/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"concesionaria",
+								"18"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "marca",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/marca",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/marca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"marca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/marca/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/marca/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"marca",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/marca/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_marca\":\"marca test\",\n\t\"descripcion_marca\":\"marca test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/marca/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"marca",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/marca/2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_marca\":\"marca test modificado\",\n\t\"descripcion_marca\":\"marca test modificado\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/marca/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"marca",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/marca/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/marca/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"marca",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "modelo",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/modelo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/modelo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"modelo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/modelo/2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/modelo/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"modelo",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/modelo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_marca\": 1,\n\t\"nombre_modelo\": \"Allure BlueHDi 130 EAT8\",\n    \"descripcion_modelo\": \"Allure BlueHDi 130 EAT8\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/modelo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"modelo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/modelo/7",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_marca\": 2,\n\t\"nombre_modelo\": \"Allure BlueHDi 130 EAT8\",\n    \"descripcion_modelo\": \"Allure BlueHDi 130 EAT8\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/modelo/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"modelo",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/modelo/7",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/modelo/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"modelo",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "asc-marca-concesionaria",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/asc-marca-concesionaria/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_marca\":1,\n\t\"id_concesionaria\":23\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/asc-marca-concesionaria/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"asc-marca-concesionaria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/asc-marca-concesionaria?id_marca=1&id_concesionaria=1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/asc-marca-concesionaria?id_marca=1&id_concesionaria=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"asc-marca-concesionaria"
+							],
+							"query": [
+								{
+									"key": "id_marca",
+									"value": "1"
+								},
+								{
+									"key": "id_concesionaria",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "asc-modelo-sucursal",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/asc-modelo-sucursal/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_modelo\":1,\n\t\"id_sucursal\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/asc-modelo-sucursal/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"asc-modelo-sucursal",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/asc-modelo-sucursal?id_modelo=1&id_sucursal=1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/asc-modelo-sucursal?id_modelo=1&id_sucursal=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"asc-modelo-sucursal"
+							],
+							"query": [
+								{
+									"key": "id_modelo",
+									"value": "1"
+								},
+								{
+									"key": "id_sucursal",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tipo_cliente",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/tipo-cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/tipo-cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"tipo-cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/tipo-cliente/2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/tipo-cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"tipo-cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/tipo-cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_tipo_cliente\":\"Viñas\",\n\t\"descripcion_tipo_cliente\":\"Viñas\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/tipo-cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"tipo-cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/tipo-cliente/2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre_tipo_cliente\":\"Educacionales\",\n\t\"descripcion_tipo_cliente\":\"Educacionales\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/tipo-cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"tipo-cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/tipo-cliente/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/tipo-cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"tipo-cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cliente",
+			"item": [
+				{
+					"name": "http://localhost:3002/v1/cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/cliente/2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_tipo_cliente\":1,\n\t\"nombre_cliente\":\"Cliente Huerta\",\n\t\"descripcion_cliente\":\"Cliente Huerta\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/cliente/2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_tipo_cliente\":1,\n\t\"nombre_cliente\":\"Cliente Huertrollo\",\n\t\"descripcion_cliente\":\"Cliente Huertrollo\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/v1/cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3002/v1/cliente/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/v1/cliente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"v1",
+								"cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "862736fb-3cbf-4684-950a-ea6ac9d51e24",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f715c475-4f25-4b6d-bdbc-eebf0e53f040",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
