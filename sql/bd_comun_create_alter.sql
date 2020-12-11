@@ -47,7 +47,6 @@ CREATE TABLE T_LOCALIDAD(
 
 CREATE TABLE T_CATEGORIA(
 	id_categoria			int  not null AUTO_INCREMENT,
-	id_localidad 			int not null,
 	destacado_categoria		bit(0),
 	nombre_categoria		varchar(100) null,
 	fecha_creacion 			date null,

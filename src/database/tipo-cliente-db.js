@@ -8,7 +8,7 @@ const pool = mysql.createPool(configDb.db);
 
 async function getTipoCl(){
     
-    let query = 'SELECT * FROM T_TIPO_CLIENTES WHERE vigente = 0'
+    let query = 'SELECT * FROM T_TIPO_CLIENTE WHERE vigente = 0'
     const result = await pool.query(query);
 
     if (!result[0]) {
@@ -19,7 +19,7 @@ async function getTipoCl(){
 }
 
 async function getTipoClId(id){
-    let query = 'SELECT * FROM T_TIPO_CLIENTES WHERE ID_TIPO_CLIENTE = '+id+' AND vigente = 0';  
+    let query = 'SELECT * FROM T_TIPO_CLIENTE WHERE ID_TIPO_CLIENTE = '+id+' AND vigente = 0';  
     const result = await pool.query(query);
 
     if (result[0].length === 0) {
@@ -32,7 +32,7 @@ async function insertTipoCl(params){
 
     const fecha_creacion = {fecha_creacion: new Date()}
     const { nombre_tipo_cliente, descripcion_tipo_cliente } = params;
-    let query = 'INSERT INTO T_TIPO_CLIENTES SET nombre_tipo_cliente = ?, descripcion_tipo_cliente = ?, fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+    let query = 'INSERT INTO T_TIPO_CLIENTE SET nombre_tipo_cliente = ?, descripcion_tipo_cliente = ?, fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
 
     const result = await pool.query(query,[nombre_tipo_cliente, descripcion_tipo_cliente, fecha_creacion.fecha_creacion, null, null, null, 0]);
 
@@ -47,7 +47,7 @@ async function updateTipoCl(params){
     const fecha_modificacion = {fecha_modificacion: new Date()};
     const {id, nombre_tipo_cliente, descripcion_tipo_cliente } = params;
     
-    let query = 'UPDATE T_TIPO_CLIENTES SET nombre_tipo_cliente = ?, descripcion_tipo_cliente = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE ID_TIPO_CLIENTE = '+id+'';
+    let query = 'UPDATE T_TIPO_CLIENTE SET nombre_tipo_cliente = ?, descripcion_tipo_cliente = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE ID_TIPO_CLIENTE = '+id+'';
 
     const result = await pool.query(query,[nombre_tipo_cliente, descripcion_tipo_cliente, fecha_modificacion.fecha_modificacion, null, 0]);
 
@@ -61,7 +61,7 @@ async function deleteTipoCl(id){
     const fecha_modificacion = {fecha_modificacion: new Date()}
     const eliminado = enums.Eliminado;
     
-    let query = 'UPDATE T_TIPO_CLIENTES SET fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE ID_TIPO_CLIENTE = '+id+'';
+    let query = 'UPDATE T_TIPO_CLIENTE SET fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE ID_TIPO_CLIENTE = '+id+'';
     const result = await pool.query(query,[fecha_modificacion.fecha_modificacion, null, eliminado]);
 
     if (result[0].affectedRows === 0) {

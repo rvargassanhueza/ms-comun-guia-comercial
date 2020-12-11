@@ -1,2 +1,2 @@
-# ms-comun-cooperativa
-Microservicio de datos comunes cooperativa 
+# ms-comun-guia-comercial
+Microservicio de datos comunes guia comercial

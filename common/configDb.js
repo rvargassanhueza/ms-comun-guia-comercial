@@ -8,7 +8,7 @@ const hostSecret = process.env.KV_SQL_SERVER_HOST;
 const mysql = require('mysql2/promise');
  
 module.exports = {
-    name: 'automotriz-api',
+    name: 'comun-comercial-ms',
     hostname : 'http://localhost',
     version: '1.0.0',
     env: process.env.NODE_ENV || 'development',
