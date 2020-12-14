@@ -1,20 +1,20 @@
 'use strict';
-var methods = require('../../src/controllers/asc-modelo-sucursal-methods');
+var methods = require('../../src/controllers/asc-localidad-categoria-methods');
 
 module.exports.register = (server) => {
     server.post({
-        path: '/asc-modelo-sucursal/',
+        path: '/asc-localidad-categoria/',
         version: '1.0.0',
         // validation: {
         //     params: require('../../src/validators/id')
         // },
     },
-    methods.insertAscMoSuc
+    methods.insertAscLocalCateg
     );
     server.del({
-        path: '/asc-modelo-sucursal/',
+        path: '/asc-localidad-categoria/',
         version: '1.0.0'
     },
-    methods.deleteAscMoSuc
+    methods.deleteAscLocalCateg
     );
 }

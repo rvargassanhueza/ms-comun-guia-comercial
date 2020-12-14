@@ -1,13 +1,13 @@
 'use strict'
 require('dotenv').config({ path: 'env.env' });
-const ascMoSucServices = require('../database/asc-modelo-sucursal-db');
+const ascCatSubCatServices = require('../database/asc-categoria-sub_categoria-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
 let _insert = async function (req, res, next){
     try{
         const { params } = req;
-        let result = await ascMoSucServices.insertAscMoSuc(params);
+        let result = await ascCatSubCatServices.insertAscCatSubCat(params);
 
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -25,8 +25,8 @@ let _insert = async function (req, res, next){
 
 let _delete = async function (req, res, next){
     try{
-        const { params:{id_modelo, id_sucursal} } = req;
-        let result = await ascMoSucServices.deleteAscMoSuc(id_modelo, id_sucursal);
+        const { params:{id_categoria, id_sub_categoria} } = req;
+        let result = await ascCatSubCatServices.deleteAscCatSubCat(id_categoria, id_sub_categoria);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -43,6 +43,6 @@ let _delete = async function (req, res, next){
 };
 
 module.exports = {
-    insertAscMoSuc: _insert,
-    deleteAscMoSuc: _delete
+    insertAscCatSubCat: _insert,
+    deleteAscCatSubCat: _delete
 }

@@ -42,12 +42,12 @@ async function getCatLocalidad(id){
 }
 
 async function insertCat(params){
-    const { nombre_categoria, descripcion_categoria, direccion_categoria } = params;
+    const { nombre_categoria, descripcion_categoria } = params;
     const fecha_creacion = {fecha_creacion: new Date()}
 
-    let query = 'INSERT INTO T_CATEGORIA SET nombre_categoria = ?, descripcion_categoria = ?, direccion_categoria = ?, fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+    let query = 'INSERT INTO T_CATEGORIA SET nombre_categoria = ?, descripcion_categoria = ?,  fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
 
-    const result = await pool.query(query,[nombre_categoria, descripcion_categoria, direccion_categoria, fecha_creacion.fecha_creacion, null, null, null, 0]);
+    const result = await pool.query(query,[nombre_categoria, descripcion_categoria, fecha_creacion.fecha_creacion, null, null, null, 0]);
 
     if (!result[0]) {
         throw new Error('Error al insertar datos');
