@@ -24,7 +24,7 @@ async function deleteAscLocalCateg(id_localidad, id_categoria){
     const fecha_modificacion = {fecha_modificacion: new Date()}
     const eliminado = enums.Eliminado;
     
-    let query = 'UPDATE T_REGISTROS_MODELO_SUCURSAL SET fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_localidad = '+id_localidad+' AND id_categoria = '+id_categoria+'';
+    let query = 'UPDATE T_PASO_LOCALIDAD_CATEGORIA SET fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_localidad = '+id_localidad+' AND id_categoria = '+id_categoria+'';
     const result = await pool.query(query,[fecha_modificacion.fecha_modificacion, null, eliminado]);
 
     if (result[0].affectedRows === 0) {
