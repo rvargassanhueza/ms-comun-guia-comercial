@@ -55,6 +55,8 @@ const uruarioRouters = require('./routers/v1/usuario-routers');
 const categoriaRouters = require('./routers/v1/categoria-routers');
 const asocCatSubCatRouters = require('./routers/v1/asc-categoria-sub_categoria-routers');
 const asocLocalidadCategoriaRouters = require('./routers/v1/asc-localidad-categoria-routers');
+const localidadRouters = require('./routers/v1/localidad-routers');
+
 
 
 tipo_clienteRouters.register(server);
@@ -64,6 +66,8 @@ uruarioRouters.register(server);
 categoriaRouters.register(server);
 asocCatSubCatRouters.register(server);
 asocLocalidadCategoriaRouters.register(server);
+localidadRouters.register(server);
+
 
 
 
