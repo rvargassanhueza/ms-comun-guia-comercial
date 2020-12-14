@@ -1,12 +1,12 @@
 'use strict'
 require('dotenv').config({ path: 'env.env' });
-const modeloServices = require('../database/modelo-db');
+const subCategoriaServices = require('../database/sub_categoria-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
 let _get = async function (req, res, next) {
     try {
-        let result = await modeloServices.getModelo();
+        let result = await subCategoriaServices.getSubCategoria();
         if (result == null) {
             res.json(httpStatus.NOT_FOUND);
             res.end();
@@ -22,7 +22,7 @@ let _get = async function (req, res, next) {
 let _getId = async function (req, res, next) {
     try {
         const id = req.params.id
-        let result = await modeloServices.getModeloId(id);
+        let result = await subCategoriaServices.getSubCategoriaId(id);
         if (result === null) {
             res.json(httpStatus.NOT_FOUND);
             res.end();
@@ -36,10 +36,28 @@ let _getId = async function (req, res, next) {
     }
 };
 
+let _getLocalidadSubCategoria = async function (req, res, next) {
+    try {
+        const id = req.params.id
+        let result = await subCategoriaServices.getSubCategoriaLocalidad(id);
+        if (result === null) {
+            res.json(httpStatus.NOT_FOUND);
+            res.end();
+            return;
+        }
+
+        res.json(httpStatus.OK, result);
+        res.end();
+    } catch (err) {
+        res.send(httpStatus.INTERNAL_SERVER_ERROR, JSON.stringify({Error: httpStatus.INTERNAL_SERVER_ERROR, Message: constants.Error.INTERNALERROR}) );
+    }
+};
+
+
 let _insert = async function (req, res, next){
     try{
         const { params } = req;
-        let result = await modeloServices.insertModelo(params);
+        let result = await subCategoriaServices.insertSubCategoria(params);
 
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -58,7 +76,7 @@ let _insert = async function (req, res, next){
 let _update = async function (req, res, next){
     try{
         const { params } = req;
-        let result = await modeloServices.updateModelo(params);
+        let result = await subCategoriaServices.updateSubCategoria(params);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -77,7 +95,7 @@ let _update = async function (req, res, next){
 let _delete = async function (req, res, next){
     try{
         const { params:{id} } = req;
-        let result = await modeloServices.deleteModelo(id);
+        let result = await subCategoriaServices.deleteSubCategoria(id);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -96,7 +114,8 @@ let _delete = async function (req, res, next){
 module.exports = {
     get: _get,
     getId: _getId,
-    insertModelo: _insert,
-    updateModelo: _update,
-    deleteModelo: _delete
+    _getLocalidadSubCategoria: _getLocalidadSubCategoria,
+    insertSubCategoria: _insert,
+    updateSubCategoria: _update,
+    deleteSubCategoria: _delete
 }

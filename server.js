@@ -56,7 +56,7 @@ const categoriaRouters = require('./routers/v1/categoria-routers');
 const asocCatSubCatRouters = require('./routers/v1/asc-categoria-sub_categoria-routers');
 const asocLocalidadCategoriaRouters = require('./routers/v1/asc-localidad-categoria-routers');
 const localidadRouters = require('./routers/v1/localidad-routers');
-
+const subCategoriaRouters = require('./routers/v1/sub_categoria-routers');
 
 
 tipo_clienteRouters.register(server);
@@ -67,8 +67,7 @@ categoriaRouters.register(server);
 asocCatSubCatRouters.register(server);
 asocLocalidadCategoriaRouters.register(server);
 localidadRouters.register(server);
-
-
+subCategoriaRouters.register(server);
 
 
 const cors = corsMiddleware({
