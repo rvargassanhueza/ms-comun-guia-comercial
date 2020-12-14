@@ -1,12 +1,12 @@
 'use strict'
 require('dotenv').config({ path: 'env.env' });
-const sucursalServices = require('../database/sucursal-db');
+const categoriaServices = require('../database/categoria-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
 let _get = async function (req, res, next) {
     try {
-        let result = await sucursalServices.getSuc();
+        let result = await categoriaServices.getCat();
         if (result == null) {
             res.json(httpStatus.NOT_FOUND);
             res.end();
@@ -22,7 +22,24 @@ let _get = async function (req, res, next) {
 let _getId = async function (req, res, next) {
     try {
         const id = req.params.id
-        let result = await sucursalServices.getSucId(id);
+        let result = await categoriaServices.getCatId(id);
+        if (result === null) {
+            res.json(httpStatus.NOT_FOUND);
+            res.end();
+            return;
+        }
+
+        res.json(httpStatus.OK, result);
+        res.end();
+    } catch (err) {
+        res.send(httpStatus.INTERNAL_SERVER_ERROR, JSON.stringify({Error: httpStatus.INTERNAL_SERVER_ERROR, Message: constants.Error.INTERNALERROR}) );
+    }
+};
+
+let _getCatLocalidad = async function (req, res, next) {
+    try {
+         const id = req.params.idLocalidad
+        let result = await categoriaServices.getCatLocalidad(id);
         if (result === null) {
             res.json(httpStatus.NOT_FOUND);
             res.end();
@@ -39,7 +56,7 @@ let _getId = async function (req, res, next) {
 let _insert = async function (req, res, next){
     try{
         const { params } = req;
-        let result = await sucursalServices.insertSuc(params);
+        let result = await categoriaServices.insertCat(params);
 
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -58,7 +75,7 @@ let _insert = async function (req, res, next){
 let _update = async function (req, res, next){
     try{
         const { params } = req;
-        let result = await sucursalServices.updateSuc(params);
+        let result = await categoriaServices.updateCat(params);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -77,7 +94,7 @@ let _update = async function (req, res, next){
 let _delete = async function (req, res, next){
     try{
         const { params:{id} } = req;
-        let result = await sucursalServices.deleteSuc(id);
+        let result = await categoriaServices.deleteCat(id);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);
@@ -94,9 +111,10 @@ let _delete = async function (req, res, next){
 };
 
 module.exports = {
-    get: _get,
-    getId: _getId,
-    insertSuc: _insert,
-    updateSuc: _update,
-    deleteSuc: _delete
+    getCat: _get,
+    getIdCat: _getId,
+    getCatLol: _getCatLocalidad,
+    insertCat: _insert,
+    updateCat: _update,
+    deleteCat: _delete
 }

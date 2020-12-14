@@ -57,6 +57,8 @@ const tipo_clienteRouters = require('./routers/v1/tipo-cliente-routers');
 const clienteRouters = require('./routers/v1/cliente-routers');
 const tipoUsuarioRouters = require('./routers/v1/tipo-usuario-routers');
 const uruarioRouters = require('./routers/v1/usuario-routers');
+const categoriaRouters = require('./routers/v1/categoria-routers');
+
 
 
 // concesionariaRouters.register(server);
@@ -69,6 +71,7 @@ tipo_clienteRouters.register(server);
 clienteRouters.register(server);
 tipoUsuarioRouters.register(server);
 uruarioRouters.register(server);
+categoriaRouters.register(server);
 
 const cors = corsMiddleware({
   preflightMaxAge: 5,
