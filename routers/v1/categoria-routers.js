@@ -3,7 +3,7 @@ var methods = require('../../src/controllers/categoria-methods');
 
 module.exports.register = (server) => {
     server.get({
-        path: '/categoria/',
+        path: '/mainData/categoria/',
         version: '1.0.0'
     },
         methods.getCat

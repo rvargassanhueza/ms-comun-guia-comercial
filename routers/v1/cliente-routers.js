@@ -3,7 +3,7 @@ var methods = require('../../src/controllers/cliente-methods');
 
 module.exports.register = (server) => {
     server.get({
-        path: '/cliente/',
+        path: '/mainData/cliente/',
         version: '1.0.0'
     },
         methods.get

@@ -3,8 +3,6 @@ const mysql = require('mysql2/promise');
 const configDb = require('../../common/configDb');
 const enums = require('../../common/enums');
 
-// Select DISTINCT tsc.nombre_sub_categoria FROM t_sub_categoria tsc INNER JOIN t_paso_localidad_categoria tp ON tp.id_localidad = 1 AND tp.id_categoria= tsc.id_categoria ORDER BY `tsc`.`nombre_sub_categoria` ASC ---> trae las sub-categorías de una localidad.
-
 const pool = mysql.createPool(configDb.db);
 
 async function getCat(){

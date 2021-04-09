@@ -3,7 +3,7 @@ var methods = require('../../src/controllers/localidad-methods');
 
 module.exports.register = (server) => {
     server.get({
-        path: '/localidad/',
+        path: '/mainData/localidad/',
         version: '1.0.0'
     },
         methods.get

@@ -6,13 +6,24 @@ const enums = require('../../common/enums');
 
 const pool = mysql.createPool(configDb.db);
 
+async function getAsocCatSub(){
+    
+    let query = 'SELECT DISTINCT * FROM T_PASO_CATEGORIA_SUB_CATEGORIA'
+    const result = await pool.query(query);
+
+    if (!result[0]) {
+        throw new Error('GET with this id was not found');
+      }
+      return result[0];
+
+}
+
 async function insertAscCatSubCat(params){
     const { id_categoria, id_sub_categoria } = params;
-    const fecha_creacion = {fecha_creacion: new Date()}
 
-    let query = 'INSERT INTO T_PASO_CATEGORIA_SUB_CATEGORIA SET id_categoria = ?, id_sub_categoria = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+    let query = 'INSERT INTO T_PASO_CATEGORIA_SUB_CATEGORIA SET id_categoria = ?, id_sub_categoria = ?';
 
-    const result = await pool.query(query,[id_categoria, id_sub_categoria, fecha_creacion.fecha_creacion, null, null, null, 0]);
+    const result = await pool.query(query,[id_categoria, id_sub_categoria]);
 
     if (!result[0]) {
         throw new Error('Error al insertar datos y realizar asociación');
@@ -34,7 +45,7 @@ async function deleteAscCatSubCat(id_categoria, id_sub_categoria){
 }
 
 module.exports = {
-    
+    getAsocCatSub:getAsocCatSub,
     insertAscCatSubCat: insertAscCatSubCat,
     deleteAscCatSubCat: deleteAscCatSubCat
 }

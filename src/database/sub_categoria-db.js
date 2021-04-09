@@ -30,6 +30,7 @@ async function getSubCategoriaId(id){
 
 async function getSubCategoriaLocalidad(id){
 
+    // ---> trae las sub-categorías de una localidad
     let query = 'Select DISTINCT tpcs.id_categoria, tsc.nombre_sub_categoria, tp.id_localidad, tsc.id_sub_categoria, tsc.nombre_sub_categoria FROM t_sub_categoria tsc INNER JOIN t_paso_categoria_sub_categoria tpcs ON tpcs.id_sub_categoria = tsc.id_sub_categoria INNER JOIN t_paso_localidad_categoria tp ON tp.id_localidad = '+id+' ORDER BY `tpcs`.`id_categoria` ASC';
 
     const result = await pool.query(query);

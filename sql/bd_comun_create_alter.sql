@@ -133,22 +133,12 @@ CREATE TABLE T_TIPO_CLIENTE(
 
 CREATE TABLE T_PASO_LOCALIDAD_CATEGORIA(
 	id_localidad				int not null,
-	id_categoria 				int not null,
-	fecha_creacion 				date null,
-  	fecha_modificacion 			date null,
-  	usuario_creacion 			int null,
-  	usuario_modificacion 		int null,
- 	vigente 					bit(0)
+	id_categoria 				int not null
 );
 
 CREATE TABLE T_PASO_CATEGORIA_SUB_CATEGORIA(
 	id_categoria				int not null,
-	id_sub_categoria 			int not null,
-	fecha_creacion 				date null,
-  	fecha_modificacion 			date null,
-  	usuario_creacion 			int null,
-  	usuario_modificacion 		int null,
- 	vigente 					bit(0)
+	id_sub_categoria 			int not null
 );
 
 
