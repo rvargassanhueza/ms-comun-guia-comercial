@@ -99,7 +99,7 @@ const ipaddress = process.env.IP;
 
 server.listen(port, ipaddress, function () {
   console.log('Server %s listening at %s', server.name, server.url)
-  console.log('Resources:')
-  console.log(' /patients')
-  console.log(' /patients/:id')
+  // console.log('Resources:')
+  // console.log(' /patients')
+  // console.log(' /patients/:id')
 })
