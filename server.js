@@ -81,7 +81,7 @@ const cors = corsMiddleware({
 server.pre(cors.preflight);
 server.use(cors.actual);
 
-const port = process.env.API_PORT || 3002;
+const port = 5000;
 
 server.listen(port, () => {
   console.log({ name: "Server startup", 
