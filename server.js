@@ -81,12 +81,25 @@ const cors = corsMiddleware({
 server.pre(cors.preflight);
 server.use(cors.actual);
 
-const port = 5000;
+// const port = 5000;
 
-server.listen(port, () => {
-  console.log({ name: "Server startup", 
-  properties: { 
-    version: API_CURRENT_VERSION,
-     date: moment.utc().format() } });
-     console.log("Port: "+port);
-});
+// server.listen(port, () => {
+//   console.log({ name: "Server startup", 
+//   properties: { 
+//     version: API_CURRENT_VERSION,
+//      date: moment.utc().format() 
+//     } 
+//   });
+//      console.log("Port: "+port);
+//      console.log('Server %s listening at %s', server.name, server.url)
+// });
+const port = process.env.API_PORT;
+const ipaddress = process.env.IP;
+
+
+server.listen(port, ipaddress, function () {
+  console.log('Server %s listening at %s', server.name, server.url)
+  console.log('Resources:')
+  console.log(' /patients')
+  console.log(' /patients/:id')
+})
