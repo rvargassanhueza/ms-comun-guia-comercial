@@ -93,11 +93,11 @@ server.use(cors.actual);
 //      console.log("Port: "+port);
 //      console.log('Server %s listening at %s', server.name, server.url)
 // });
-const port = process.env.API_PORT;
+// const port = process.env.API_PORT ;
 const ipaddress = process.env.IP;
 
 
-server.listen(port, ipaddress, function () {
+server.listen(process.env.PORT || 3002, ipaddress, function () {
   console.log('Server %s listening at %s', server.name, server.url)
   // console.log('Resources:')
   // console.log(' /patients')
