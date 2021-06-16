@@ -19,7 +19,7 @@ module.exports.register = (server) => {
         path: '/usuario/',
         version: '1.0.0',
         validation: {
-            params: require('../../src/validators/usuarios/insert')
+            // params: require('../../src/validators/usuarios/insert')
         },
     },
     methods.insertUser
@@ -29,7 +29,7 @@ module.exports.register = (server) => {
         path: '/usuario/:id',
         version: '1.0.0',
         validation: {
-            params: require('../../src/validators/usuarios/insert')
+            // params: require('../../src/validators/usuarios/insert')
         },
     },
     methods.updateUser
