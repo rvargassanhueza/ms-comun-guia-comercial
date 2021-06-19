@@ -72,7 +72,7 @@ subCategoriaRouters.register(server);
 
 const cors = corsMiddleware({
   preflightMaxAge: 5,
-  origins: ['http://localhost:4200'],
+  origins: ['http://localhost:3000'],
   allowHeaders: ['Authorization'],
   allowMethods: ['*'],
   exposeHeaders: ['API-Token-Expiry']
