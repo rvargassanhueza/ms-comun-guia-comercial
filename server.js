@@ -69,7 +69,6 @@ asocLocalidadCategoriaRouters.register(server);
 localidadRouters.register(server);
 subCategoriaRouters.register(server);
 
-
 const cors = corsMiddleware({
   preflightMaxAge: 5,
   origins: ['http://localhost:3000'],
