@@ -8,7 +8,8 @@ const pool = mysql.createPool(configDb.db);
 
 async function get(){
     
-    let query = 'SELECT * FROM T_USUARIO WHERE vigente = 0'
+    let query = 'SELECT us.nombre_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario FROM T_USUARIO us inner join t_tipo_usuario tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0';
+    
     const result = await pool.query(query);
 
     if (!result[0]) {
