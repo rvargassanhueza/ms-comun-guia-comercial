@@ -20,7 +20,7 @@ async function get(){
 }
 
 async function getId(id){
-    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario FROM T_USUARIO us inner join t_tipo_usuario tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0 and us.id_usuario = '+id+'';  
+    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario,us.pass_usuario FROM T_USUARIO us inner join t_tipo_usuario tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0 and us.id_usuario = '+id+'';  
 
     
     const result = await pool.query(query);
