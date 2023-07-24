@@ -1,44 +1,10 @@
 'use strict';
-var methods = require('../../src/controllers/usuario-methods');
+const methods = require('../../src/controllers/usuario-methods');
 
-module.exports.register = (server) => {
-    server.get({
-        path: '/usuario/',
-        version: '1.0.0'
-    },
-        methods.get
-    );
-    server.get({
-        path: '/usuario/:id',
-        version: '1.0.0'
-    },
-    methods.getId
-    );
-
-    server.post({
-        path: '/usuario/',
-        version: '1.0.0',
-        validation: {
-            // params: require('../../src/validators/usuarios/insert')
-        },
-    },
-    methods.insertUser
-    );
-
-    server.put({
-        path: '/usuario/:id',
-        version: '1.0.0',
-        validation: {
-            // params: require('../../src/validators/usuarios/insert')
-        },
-    },
-    methods.updateUser
-    );
-
-    server.del({
-        path: '/usuario/:id',
-        version: '1.0.0'
-    },
-    methods.deleteUser
-    );
-}
+module.exports.register = (app) => {
+    app.get('/usuario/', methods.get);
+    app.get('/usuario/:id', methods.getId);
+    app.post('/usuario/', methods.insertUser);
+    app.put('/usuario/:id', methods.updateUser);
+    app.delete('/usuario/:id', methods.deleteUser);
+};

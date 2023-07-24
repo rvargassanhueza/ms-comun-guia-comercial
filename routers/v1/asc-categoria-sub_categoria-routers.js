@@ -19,7 +19,7 @@ module.exports.register = (server) => {
     },
     methods.insertAscCatSubCat
     );
-    server.del({
+    server.delete({
         path: '/asc-categoria-sub_categoria/',
         version: '1.0.0'
     },

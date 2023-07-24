@@ -4,7 +4,7 @@ const ascCatSubCatServices = require('../database/asc-categoria-sub_categoria-db
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
-let _get = async function (req, res, next) {
+let _get = async function (req, res) {
     try {
         let result = await ascCatSubCatServices.getAsocCatSub();
         if (result == null) {
@@ -19,7 +19,7 @@ let _get = async function (req, res, next) {
     }
 };
 
-let _insert = async function (req, res, next){
+let _insert = async function (req, res){
     try{
         const { params } = req;
         let result = await ascCatSubCatServices.insertAscCatSubCat(params);
@@ -38,7 +38,7 @@ let _insert = async function (req, res, next){
     }
 };
 
-let _delete = async function (req, res, next){
+let _delete = async function (req, res){
     try{
         const { params:{id_categoria, id_sub_categoria} } = req;
         let result = await ascCatSubCatServices.deleteAscCatSubCat(id_categoria, id_sub_categoria);

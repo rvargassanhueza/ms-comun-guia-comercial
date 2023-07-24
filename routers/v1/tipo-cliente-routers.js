@@ -16,30 +16,30 @@ module.exports.register = (server) => {
     methods.getId
     );
 
-    server.post({
-        path: '/tipo-cliente/',
-        version: '1.0.0',
-        validation: {
-            params: require('../../src/validators/tipo_cliente/insert')
-        },
-    },
-    methods.insertMarca
-    );
+    // server.post({
+    //     path: '/tipo-cliente/',
+    //     version: '1.0.0',
+    //     validation: {
+    //         params: require('../../src/validators/tipo_cliente/insert')
+    //     },
+    // },
+    // methods.insertMarca
+    // );
 
-    server.put({
-        path: '/tipo-cliente/:id',
-        version: '1.0.0',
-        validation: {
-            params: require('../../src/validators/tipo_cliente/insert')
-        },
-    },
-    methods.updateMarca
-    );
+    // server.put({
+    //     path: '/tipo-cliente/:id',
+    //     version: '1.0.0',
+    //     validation: {
+    //         params: require('../../src/validators/tipo_cliente/insert')
+    //     },
+    // },
+    // methods.updateMarca
+    // );
 
-    server.del({
-        path: '/tipo-cliente/:id',
-        version: '1.0.0'
-    },
-    methods.deleteMarca
-    );
+    // server.del({
+    //     path: '/tipo-cliente/:id',
+    //     version: '1.0.0'
+    // },
+    // methods.deleteMarca
+    // );
 }

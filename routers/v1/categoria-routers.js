@@ -43,7 +43,7 @@ module.exports.register = (server) => {
     methods.updateCat
     );
 
-    server.del({
+    server.delete({
         path: '/categoria/:id',
         version: '1.0.0'
     },

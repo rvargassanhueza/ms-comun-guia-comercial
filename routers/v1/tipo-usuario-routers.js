@@ -35,7 +35,7 @@ module.exports.register = (server) => {
     methods.updateUser
     );
 
-    server.del({
+    server.delete({
         path: '/tipo-usuario/:id',
         version: '1.0.0'
     },

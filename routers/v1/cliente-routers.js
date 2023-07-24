@@ -36,7 +36,7 @@ module.exports.register = (server) => {
     methods.updateCliente
     );
 
-    server.del({
+    server.delete({
         path: '/cliente/:id',
         version: '1.0.0'
     },

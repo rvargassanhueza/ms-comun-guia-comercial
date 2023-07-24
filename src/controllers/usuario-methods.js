@@ -4,39 +4,34 @@ const userServices = require('../database/usuario-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
-let _get = async function (req, res, next) {
+let _get = async function (req, res) {
     try {
         let result = await userServices.getUser();
         if (result == null) {
-            res.json(httpStatus.NOT_FOUND);
-            res.end();
+            res.status(httpStatus.NOT_FOUND).json({ error: 'User not found' });
             return;
         }
-        res.json(httpStatus.OK, result);
-        res.end();
+        res.status(httpStatus.OK).json(result);
     } catch (err) {
-        res.send(httpStatus.INTERNAL_SERVER_ERROR, JSON.stringify({Error: httpStatus.INTERNAL_SERVER_ERROR, Message: constants.Error.INTERNALERROR}) );
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
     }
 };
 
-let _getId = async function (req, res, next) {
+let _getId = async function (req, res) {
     try {
-        const id = req.params.id
+        const id = req.params.id;
         let result = await userServices.getUserId(id);
         if (result === null) {
-            res.json(httpStatus.NOT_FOUND);
-            res.end();
+            res.status(httpStatus.NOT_FOUND).json({ error: 'User not found' });
             return;
         }
-
-        res.json(httpStatus.OK, result);
-        res.end();
+        res.status(httpStatus.OK).json(result);
     } catch (err) {
-        res.send(httpStatus.INTERNAL_SERVER_ERROR, JSON.stringify({Error: httpStatus.INTERNAL_SERVER_ERROR, Message: constants.Error.INTERNALERROR}) );
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
     }
 };
 
-let _insert = async function (req, res, next){
+let _insert = async function (req, res){
     try{
         const { params } = req;
         let result = await userServices.insertUser(params);
@@ -55,7 +50,7 @@ let _insert = async function (req, res, next){
     }
 };
 
-let _update = async function (req, res, next){
+let _update = async function (req, res){
     try{
         const { params } = req;
         let result = await userServices.updateUser(params);
@@ -74,7 +69,7 @@ let _update = async function (req, res, next){
     }
 };
 
-let _delete = async function (req, res, next){
+let _delete = async function (req, res){
     try{
         const { params:{id} } = req;
         let result = await userServices.deleteUser(id);

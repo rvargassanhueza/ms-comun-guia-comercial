@@ -4,7 +4,7 @@ const categoriaServices = require('../database/categoria-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
-let _get = async function (req, res, next) {
+let _get = async function (req, res) {
     try {
         let result = await categoriaServices.getCat();
         if (result == null) {
@@ -19,7 +19,7 @@ let _get = async function (req, res, next) {
     }
 };
 
-let _getId = async function (req, res, next) {
+let _getId = async function (req, res) {
     try {
         const id = req.params.id
         let result = await categoriaServices.getCatId(id);
@@ -36,7 +36,7 @@ let _getId = async function (req, res, next) {
     }
 };
 
-let _getCatLocalidad = async function (req, res, next) {
+let _getCatLocalidad = async function (req, res) {
     try {
          const id = req.params.idLocalidad
         let result = await categoriaServices.getCatLocalidad(id);
@@ -53,7 +53,7 @@ let _getCatLocalidad = async function (req, res, next) {
     }
 };
 
-let _insert = async function (req, res, next){
+let _insert = async function (req, res){
     try{
         const { params } = req;
         let result = await categoriaServices.insertCat(params);
@@ -72,7 +72,7 @@ let _insert = async function (req, res, next){
     }
 };
 
-let _update = async function (req, res, next){
+let _update = async function (req, res){
     try{
         const { params } = req;
         let result = await categoriaServices.updateCat(params);
@@ -91,7 +91,7 @@ let _update = async function (req, res, next){
     }
 };
 
-let _delete = async function (req, res, next){
+let _delete = async function (req, res){
     try{
         const { params:{id} } = req;
         let result = await categoriaServices.deleteCat(id);

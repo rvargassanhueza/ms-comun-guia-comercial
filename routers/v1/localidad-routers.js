@@ -36,7 +36,7 @@ module.exports.register = (server) => {
     methods.updateLocalidad
     );
 
-    server.del({
+    server.delete({
         path: '/localidad/:id',
         version: '1.0.0'
     },

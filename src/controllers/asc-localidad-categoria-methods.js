@@ -4,7 +4,7 @@ const AscLocalCategServices = require('../database/asc-localidad-categoria-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
 
-let _insert = async function (req, res, next){
+let _insert = async function (req, res){
     try{
         const { params } = req;
         let result = await AscLocalCategServices.insertAscLocalCateg(params);
@@ -23,7 +23,7 @@ let _insert = async function (req, res, next){
     }
 };
 
-let _delete = async function (req, res, next){
+let _delete = async function (req, res){
     try{
         const { params:{id_modelo, id_sucursal} } = req;
         let result = await AscLocalCategServices.deleteAscLocalCateg(id_modelo, id_sucursal);

@@ -11,7 +11,7 @@ module.exports.register = (server) => {
     },
     methods.insertAscLocalCateg
     );
-    server.del({
+    server.delete({
         path: '/asc-localidad-categoria/',
         version: '1.0.0'
     },
