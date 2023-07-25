@@ -2,6 +2,7 @@
 const mysql = require('mysql2/promise');
 const configDb = require('../../common/configDb');
 const enums = require('../../common/enums');
+const bcrypt = require('bcrypt');
 
 
 const pool = mysql.createPool(configDb.db);
@@ -32,19 +33,38 @@ async function getId(id){
       return result[0];
 }
 
-async function insertUser(params){
-    const {id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario } = params;
-    const fecha_creacion = {fecha_creacion: new Date()}
+async function insertUser(params) {
+    try {
+        const {id_tipo_usuario, email_usuario, pass_usuario, descripcion_usuario } = params;
+        const fecha_creacion = {fecha_creacion: new Date()}
+  
+      // Encriptar la contraseña antes de almacenarla en la base de datos
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(pass_usuario, saltRounds);
+  
+      // Crear una nueva conexión para la inserción del usuario
+      const connection = await pool.getConnection();
+  
+      // Realizar la inserción en la base de datos
+      const query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, email_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
 
-    let query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+      const values = [id_tipo_usuario, email_usuario, hashedPassword, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0];
 
-    const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0]);
+    //   let query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
 
-    if (!result[0]) {
-        throw new Error('Error al insertar datos');
-      }
-      return result[0];
-}
+    // const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0]);
+  
+      await connection.query(query, values);
+  
+      // Liberar la conexión
+      connection.release();
+  
+      return { success: true, message: 'Usuario registrado con éxito' };
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: 'Error al registrar el usuario' };
+    }
+  }
 
 async function updateUser(params){
     const {id, id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario } = params;

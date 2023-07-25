@@ -33,7 +33,10 @@ let _getId = async function (req, res) {
 
 let _insert = async function (req, res){
     try{
-        const { params } = req;
+        const { id_tipo_usuario, email_usuario, pass_usuario, descripcion_usuario, } = req.body;
+
+        const params = { id_tipo_usuario: id_tipo_usuario, email_usuario: email_usuario, pass_usuario:pass_usuario, descripcion_usuario:descripcion_usuario};
+
         let result = await userServices.insertUser(params);
 
         if(result === null){
