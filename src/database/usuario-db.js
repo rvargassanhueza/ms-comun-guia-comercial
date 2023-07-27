@@ -9,7 +9,7 @@ const pool = mysql.createPool(configDb.db);
 
 async function get(){
     
-    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0';
+    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0';
 
     const result = await pool.query(query);
 
@@ -22,7 +22,7 @@ async function get(){
 
 async function getId(id){
     
-    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario,us.pass_usuario FROM T_USUARIO us inner join t_tipo_usuario tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0 and us.id_usuario = '+id+'';  
+    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario,us.pass_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0 and us.id_usuario = '+id+'';  
 
     
     const result = await pool.query(query);
@@ -35,8 +35,14 @@ async function getId(id){
 
 async function insertUser(params) {
     try {
-        const {id_tipo_usuario, email_usuario, pass_usuario, descripcion_usuario } = params;
+        const {id_tipo_usuario, nombre_usuario, apellido_usuario, email_usuario, pass_usuario, descripcion_usuario } = params;
         const fecha_creacion = {fecha_creacion: new Date()}
+
+         // Verificar si el usuario o el correo electrónico ya existen
+        const userExists = await checkUserExistence(email_usuario);
+        if (userExists) {
+          return null; // Devuelve null si el usuario o correo electrónico ya existen
+        }
   
       // Encriptar la contraseña antes de almacenarla en la base de datos
       const saltRounds = 10;
@@ -46,13 +52,9 @@ async function insertUser(params) {
       const connection = await pool.getConnection();
   
       // Realizar la inserción en la base de datos
-      const query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, email_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+      const query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, email_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?, sesion_activa = ?, nombre_usuario = ?, apellido_usuario = ?';
 
-      const values = [id_tipo_usuario, email_usuario, hashedPassword, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0];
-
-    //   let query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
-
-    // const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0]);
+      const values = [id_tipo_usuario, email_usuario, hashedPassword, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0, 0, nombre_usuario, apellido_usuario ];
   
       await connection.query(query, values);
   
@@ -66,13 +68,29 @@ async function insertUser(params) {
     }
   }
 
+  async function checkUserExistence(email) {
+    try {
+      const query = 'SELECT COUNT(*) as count FROM T_USUARIO WHERE email_usuario = ?';
+      const values = [email];
+  
+      const result = await pool.query(query, values);
+      const count = result[0][0].count;
+  
+      return count > 0; // Devuelve true si el usuario o correo electrónico ya existen
+    } catch (error) {
+      console.error(error);
+      return false; // En caso de error, devuelve false
+    }
+  }
+  
+
 async function updateUser(params){
-    const {id, id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario } = params;
+    const {id, id_tipo_usuario, nombre_usuario, apellido_usuario, pass_usuario, descripcion_usuario } = params;
     const fecha_modificacion = {fecha_modificacion: new Date()}
 
-    let query = 'UPDATE T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?, pass_usuario = ?,descripcion_usuario = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_usuario = '+id+'';
+    let query = 'UPDATE T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?,  apellido_usuario = ?, pass_usuario = ?,descripcion_usuario = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_usuario = '+id+'';
 
-    const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, pass_usuario, descripcion_usuario,fecha_modificacion.fecha_modificacion, null, 0]);
+    const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, apellido_usuario, pass_usuario, descripcion_usuario,fecha_modificacion.fecha_modificacion, null, 0]);
 
     if (result[0].affectedRows === 0) {
         return null;

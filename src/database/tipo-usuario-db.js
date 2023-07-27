@@ -8,7 +8,7 @@ const pool = mysql.createPool(configDb.db);
 
 async function get(){
     
-    let query = 'SELECT * FROM T_TIPO_USUARIO WHERE vigente = 0'
+    let query = 'SELECT * FROM T_TIPO_USUARIO WHERE vigente = 1'
     const result = await pool.query(query);
 
     if (!result[0]) {

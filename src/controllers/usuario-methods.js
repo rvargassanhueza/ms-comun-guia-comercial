@@ -33,24 +33,21 @@ let _getId = async function (req, res) {
 
 let _insert = async function (req, res){
     try{
-        const { id_tipo_usuario, email_usuario, pass_usuario, descripcion_usuario, } = req.body;
+        const { id_tipo_usuario, nombre_usuario, apellido_usuario, email_usuario, pass_usuario, descripcion_usuario, } = req.body;
 
-        const params = { id_tipo_usuario: id_tipo_usuario, email_usuario: email_usuario, pass_usuario:pass_usuario, descripcion_usuario:descripcion_usuario};
+        const params = { id_tipo_usuario: id_tipo_usuario, nombre_usuario:nombre_usuario, apellido_usuario:apellido_usuario, email_usuario: email_usuario, pass_usuario:pass_usuario, descripcion_usuario:descripcion_usuario};
 
         let result = await userServices.insertUser(params);
 
-        if(result === null){
-            res.json(httpStatus.NOT_FOUND);
-            res.end();
-            return;
-        }
-        res.json(httpStatus.CREATED, result);
-        res.end();
-        
-    }catch(err){
-        res.send(httpStatus.INTERNAL_SERVER_ERROR, JSON.stringify({Error: httpStatus.INTERNAL_SERVER_ERROR, Message: constants.Error.INTERNALERROR}) );
+        if (result === null) {
+            res.status(httpStatus.CONFLICT).json({ error: 'El usuario o correo electrónico ya existen',code:1 });
+          } else {
+            res.status(httpStatus.CREATED).json({ message: 'Usuario registrado exitosamente', userId: result });
+          }
 
-    }
+    } catch (err) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Error en el servidor' });
+      }
 };
 
 let _update = async function (req, res){

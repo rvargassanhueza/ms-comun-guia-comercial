@@ -1,44 +1,10 @@
 'use strict';
 var methods = require('../../src/controllers/tipo-usuario-methods');
 
-module.exports.register = (server) => {
-    server.get({
-        path: '/tipo-usuario/',
-        version: '1.0.0'
-    },
-        methods.get
-    );
-    server.get({
-        path: '/tipo-usuario/:id',
-        version: '1.0.0'
-    },
-    methods.getId
-    );
-
-    server.post({
-        path: '/tipo-usuario/',
-        version: '1.0.0',
-        validation: {
-            params: require('../../src/validators/usuarios/tipo-usuario/insert')
-        },
-    },
-    methods.insertUser
-    );
-
-    server.put({
-        path: '/tipo-usuario/:id',
-        version: '1.0.0',
-        validation: {
-            params: require('../../src/validators/usuarios/tipo-usuario/insert')
-        },
-    },
-    methods.updateUser
-    );
-
-    server.delete({
-        path: '/tipo-usuario/:id',
-        version: '1.0.0'
-    },
-    methods.deleteUser
-    );
-}
+module.exports.register = (app) => {
+    app.get('/tipo-usuario/', methods.get);
+    app.get('/tipo-usuario/:id', methods.getId);
+    app.post('/tipo-usuario/', methods.insertUser);
+    app.put('/tipo-usuario/:id', methods.updateUser);
+    app.delete('/tipo-usuario/:id', methods.deleteUser);
+};
