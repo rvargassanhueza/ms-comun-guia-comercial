@@ -20,7 +20,7 @@ let _login = async function (req, res) {
       }
       
     } else {
-      return res.status(httpStatus.OK).json({ token:result.token, email: result.email_usuario, tipo_usuario: result.tipo_usuario, sesion_activa: result.sesion_activa, id_usuario:result.id_usuario });
+      return res.status(httpStatus.OK).json({ token:result.token, nombre_usuario:result.nombre_usuario, apellido_usuario:result.apellido_usuario, email: result.email_usuario, tipo_usuario: result.tipo_usuario, sesion_activa: result.sesion_activa, id_usuario:result.id_usuario });
     }
   } catch (err) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Error en el servidor' });

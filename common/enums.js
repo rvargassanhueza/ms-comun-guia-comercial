@@ -1,8 +1,8 @@
 'use strict';
 
 const Enums = { 
-    Activo : 0,
-    Eliminado : 1
+    Activo : 1,
+    Eliminado : 0
  };
 
 module.exports = Enums;

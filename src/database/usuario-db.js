@@ -9,7 +9,7 @@ const pool = mysql.createPool(configDb.db);
 
 async function get(){
     
-    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0';
+    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 1';
 
     const result = await pool.query(query);
 
@@ -22,15 +22,23 @@ async function get(){
 
 async function getId(id){
     
-    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario,us.pass_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 0 and us.id_usuario = '+id+'';  
+  try {
+    let query = 'SELECT us.id_usuario, us.nombre_usuario, us.apellido_usuario, us.email_usuario, us.descripcion_usuario, tus.nombre_tipo_usuario, tus.id_tipo_usuario,us.pass_usuario FROM T_USUARIO us inner join T_TIPO_USUARIO tus WHERE us.id_tipo_usuario = tus.id_tipo_usuario and us.vigente = 1 and us.id_usuario = '+id+'';  
 
     
-    const result = await pool.query(query);
+    const result = await pool.query(query, id);
 
-    if (result[0].length === 0) {
-        return null;
-      }
-      return result[0];
+    const user = result[0][0];
+
+    if (!result || result.length === 0 || result[0].length === 0) {
+      return { error:1, message: 'Id de Usuario no válido' };
+    }else{
+      return {id_usuario:user.id_usuario, nombre_usuario:user.nombre_usuario, apellido_usuario:user.apellido_usuario, email_usuario:user.email_usuario, descripcion_usuario:user.descripcion_usuario, id_tipo_usuario:user.id_tipo_usuario, nombre_tipo_usuario:user.nombre_tipo_usuario}
+    }
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Error en el servidor' };
+  }
 }
 
 async function insertUser(params) {
@@ -54,7 +62,7 @@ async function insertUser(params) {
       // Realizar la inserción en la base de datos
       const query = 'INSERT INTO T_USUARIO SET id_tipo_usuario = ?, email_usuario = ?, pass_usuario = ?,descripcion_usuario = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?, sesion_activa = ?, nombre_usuario = ?, apellido_usuario = ?';
 
-      const values = [id_tipo_usuario, email_usuario, hashedPassword, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 0, 0, nombre_usuario, apellido_usuario ];
+      const values = [id_tipo_usuario, email_usuario, hashedPassword, descripcion_usuario, fecha_creacion.fecha_creacion, null, null, null, 1, 0, nombre_usuario, apellido_usuario ];
   
       await connection.query(query, values);
   
@@ -85,12 +93,12 @@ async function insertUser(params) {
   
 
 async function updateUser(params){
-    const {id, id_tipo_usuario, nombre_usuario, apellido_usuario, pass_usuario, descripcion_usuario } = params;
+    const {id_usuario, id_tipo_usuario, nombre_usuario, apellido_usuario, pass_usuario, descripcion_usuario } = params;
     const fecha_modificacion = {fecha_modificacion: new Date()}
 
-    let query = 'UPDATE T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?,  apellido_usuario = ?, pass_usuario = ?,descripcion_usuario = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_usuario = '+id+'';
+    let query = 'UPDATE T_USUARIO SET id_tipo_usuario = ?, nombre_usuario = ?,  apellido_usuario = ?, descripcion_usuario = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE id_usuario = '+id_usuario+'';
 
-    const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, apellido_usuario, pass_usuario, descripcion_usuario,fecha_modificacion.fecha_modificacion, null, 0]);
+    const result = await pool.query(query,[id_tipo_usuario, nombre_usuario, apellido_usuario, descripcion_usuario,fecha_modificacion.fecha_modificacion, null, 1]);
 
     if (result[0].affectedRows === 0) {
         return null;

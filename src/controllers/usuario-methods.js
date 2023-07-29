@@ -18,16 +18,23 @@ let _get = async function (req, res) {
 };
 
 let _getId = async function (req, res) {
+  
     try {
-        const id = req.params.id;
-        let result = await userServices.getUserId(id);
-        if (result === null) {
-            res.status(httpStatus.NOT_FOUND).json({ error: 'User not found' });
-            return;
+            const id = req.params.id;
+            let result = await userServices.getUserId(id);
+
+    if (result.error) {
+      if(result.error === 1){//Credenciales inválidas o usuario no encontrado
+          return res.status(httpStatus.UNAUTHORIZED).json({ error: result.error, message:result.message });
         }
-        res.status(httpStatus.OK).json(result);
+        
+      } else {
+        // return res.status(httpStatus.OK).json({ token:result.token, email: result.email_usuario, tipo_usuario: result.tipo_usuario, sesion_activa: result.sesion_activa, id_usuario:result.id_usuario });
+
+        return res.status(httpStatus.OK).json({id_usuario:result.id_usuario, nombre_usuario:result.nombre_usuario, apellido_usuario:result.apellido_usuario, email_usuario:result.email_usuario, descripcion_usuario:result.descripcion_usuario, id_tipo_usuario:result.id_tipo_usuario, nombre_tipo_usuario:result.nombre_tipo_usuario});
+      }
     } catch (err) {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Error en el servidor' });
     }
 };
 
@@ -52,8 +59,14 @@ let _insert = async function (req, res){
 
 let _update = async function (req, res){
     try{
-        const { params } = req;
-        let result = await userServices.updateUser(params);
+        // const { objUpdate:{nombre_usuario,
+        //     apellido_usuario,
+        //     descripcion_usuario,
+        //     tipoUsuario,
+        //     id_tipo_usuario,
+        //     email_usuario}} = req.body;
+
+        let result = await userServices.updateUser(req.body);
         
         if(result === null){
             res.json(httpStatus.NOT_FOUND);

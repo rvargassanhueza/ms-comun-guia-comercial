@@ -45,7 +45,9 @@ const routers = [
   require('./routers/v1/asc-localidad-categoria-routers'),
   require('./routers/v1/localidad-routers'),
   require('./routers/v1/sub_categoria-routers'),
-  require('./routers/v1/login-routers')
+  require('./routers/v1/login-routers'),
+  require('./routers/v1/territorio-routers')
+
 ];
 
 routers.forEach(router => {

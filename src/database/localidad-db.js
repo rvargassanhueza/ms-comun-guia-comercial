@@ -8,7 +8,7 @@ const pool = mysql.createPool(configDb.db);
 
 async function getLocalidad(){
     
-    let query = 'SELECT * FROM T_LOCALIDAD WHERE vigente = 0'
+    let query = 'SELECT * FROM T_LOCALIDAD WHERE vigente = 1'
     const result = await pool.query(query);
 
     if (!result[0]) {
@@ -18,8 +18,8 @@ async function getLocalidad(){
 
 }
 
-async function getLocalidadId(id){
-    let query = 'SELECT * FROM T_LOCALIDAD WHERE ID_LOCALIDAD = '+id+' AND vigente = 0';  
+async function getLocalidadId(id){ // traer localidad por id de comuna
+    let query = 'SELECT  lc.id_localidad, lc.nombre_localidad, cm.nombre_comuna FROM T_LOCALIDAD lc inner join T_COMUNA cm WHERE lc.id_comuna = cm.id_comuna and lc.id_comuna ='+id+' AND lc.vigente = 1';  
     const result = await pool.query(query);
 
     if (result[0].length === 0) {

@@ -30,14 +30,14 @@ async function loginUser(params) {
 
     if (isPasswordValid) {
       // Generar el token de autenticación
-      const token = jwt.sign({ email: user.email_usuario, tipo_usuario: user.id_tipo_usuario, sesion_activa:user.sesion_activa, id_usuario:user.id_usuario }, 'secret-key', { expiresIn: '1h' });
+      const token = jwt.sign({ email: user.email_usuario, nombre_usuario:user.nombre_usuario, apellido_usuario:user.apellido_usuario, tipo_usuario: user.id_tipo_usuario, sesion_activa:user.sesion_activa, id_usuario:user.id_usuario }, 'secret-key', { expiresIn: '1h' });
 
       let userId = user.id_usuario;
 
       const updateQuery = 'UPDATE T_USUARIO SET sesion_activa = 1 WHERE id_usuario = ?';
       await pool.query(updateQuery, [userId]);
 
-      return { token:token, email: user.email_usuario, tipo_usuario: user.id_tipo_usuario, sesion_activa: user.sesion_activa, id_usuario:user.id_usuario };
+      return { token:token, email: user.email_usuario, nombre_usuario:user.nombre_usuario, apellido_usuario:user.apellido_usuario, tipo_usuario: user.id_tipo_usuario, sesion_activa:user.sesion_activa, id_usuario:user.id_usuario };
     } else {
       return { error:1, message: 'Credenciales inválidas' };
     }
