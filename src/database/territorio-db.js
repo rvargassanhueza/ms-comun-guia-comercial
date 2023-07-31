@@ -39,7 +39,7 @@ async function _getProvincia(id){
   }
 }
 
-async function _getComuna(id){
+async function _getComunaiD(id){
     
     try {
         let query = 'SELECT DISTINCT cm.id_comuna, cm.nombre_comuna FROM T_COMUNA cm inner join T_PROVINCIA pv WHERE cm.id_provincia = '+id+''; 
@@ -59,8 +59,29 @@ async function _getComuna(id){
     }
   }
 
+  async function _getComuna(texto){
+    
+    try {
+      let query = `SELECT DISTINCT cm.id_comuna, cm.nombre_comuna FROM T_COMUNA cm WHERE cm.nombre_comuna LIKE '%${texto}%'`;
+      
+      const result = await pool.query(query);
+  
+      const comuna = result[0];
+  
+      if (!result || result.length === 0 || result[0].length === 0) {
+        return { error:1, message: 'Id de Usuario no válido' };
+      }else{
+        return {comuna}
+      }
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: 'Error en el servidor' };
+    }
+  }
+
 module.exports = {
     getRegion: _getRegion,
     getProvincia: _getProvincia,
+    getComunaiD: _getComunaiD,
     getComuna: _getComuna
 }

@@ -32,11 +32,27 @@ let _getProvincia = async function (req, res) {
     }
 };
 
-let _getComuna = async function (req, res) {
+let _getComunaiD = async function (req, res) {
     try {
         const id = req.params.id;
 
-        let result = await territorioServices.getComuna(id);
+        let result = await territorioServices.getComunaiD(id);
+        if (result == null) {
+            res.status(httpStatus.NOT_FOUND).json({ error: 'Comuna not found' });
+            return;
+        }
+        res.status(httpStatus.OK).json(result);
+    } catch (err) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Internal server error' });
+    }
+};
+
+let _getComuna = async function (req, res) {
+    try {
+
+        const texto = req.params.texto;
+
+        let result = await territorioServices.getComuna(texto);
         if (result == null) {
             res.status(httpStatus.NOT_FOUND).json({ error: 'Comuna not found' });
             return;
@@ -52,5 +68,6 @@ let _getComuna = async function (req, res) {
 module.exports = {
     getRegion: _getRegion,
     getProvincia: _getProvincia,
-    getComuna: _getComuna
+    getComunaiD: _getComunaiD,
+    getComuna:_getComuna
 }

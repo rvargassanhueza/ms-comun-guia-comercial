@@ -18,8 +18,22 @@ async function getLocalidad(){
 
 }
 
-async function getLocalidadId(id){ // traer localidad por id de comuna
-    let query = 'SELECT  lc.id_localidad, lc.nombre_localidad, cm.nombre_comuna FROM T_LOCALIDAD lc inner join T_COMUNA cm WHERE lc.id_comuna = cm.id_comuna and lc.id_comuna ='+id+' AND lc.vigente = 1';  
+async function getLocalidadId(id){ // traer localidad por id de comuna 
+
+    let query = 'SELECT  lc.id_localidad, lc.nombre_localidad, cm.id_comuna, cm.nombre_comuna, rg.id_region, rg.nombre_region, pv.id_provincia, pv.nombre_provincia FROM T_LOCALIDAD lc inner join T_COMUNA cm inner join T_REGION rg inner join T_PROVINCIA pv WHERE lc.id_comuna = cm.id_comuna and lc.id_comuna ='+id+' and rg.id_region = lc.id_region and pv.id_provincia = lc.id_provincia AND lc.vigente = 1';
+
+    const result = await pool.query(query);
+
+    if (result[0].length === 0) {
+        return null;
+      }
+      return result[0];
+}
+
+async function getLocalidadIdLocalidad(id){ // traer localidad por id de localidad 
+
+    let query = 'SELECT  lc.id_localidad, lc.nombre_localidad, cm.id_comuna, cm.nombre_comuna, rg.id_region, rg.nombre_region, pv.id_provincia, pv.nombre_provincia FROM T_LOCALIDAD lc inner join T_COMUNA cm inner join T_REGION rg inner join T_PROVINCIA pv WHERE lc.id_comuna = cm.id_comuna and lc.id_localidad ='+id+' and rg.id_region = lc.id_region and pv.id_provincia = lc.id_provincia AND lc.vigente = 1';
+
     const result = await pool.query(query);
 
     if (result[0].length === 0) {
@@ -29,12 +43,12 @@ async function getLocalidadId(id){ // traer localidad por id de comuna
 }
 
 async function insertLocalidad(params){
-    const { nombre_localidad, id_comuna } = params;
+    const { comunaLocalidad, regionLocalidad, provinciaLocalidad, nombreLocalidad } = params;
     const fecha_creacion = {fecha_creacion: new Date()}
 
-    let query = 'INSERT INTO T_LOCALIDAD SET nombre_localidad = ?, id_comuna = ?,fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?';
+    let query = 'INSERT INTO T_LOCALIDAD SET nombre_localidad = ?, id_comuna = ?, fecha_creacion = ?, fecha_modificacion = ?, usuario_creacion = ?, usuario_modificacion = ?, vigente = ?, id_region = ?, id_provincia = ?';
 
-    const result = await pool.query(query,[nombre_localidad, id_comuna, fecha_creacion.fecha_creacion, null, null, null, 0]);
+    const result = await pool.query(query,[nombreLocalidad, comunaLocalidad, fecha_creacion.fecha_creacion, null, null, null, 1, regionLocalidad, provinciaLocalidad ]);
 
     if (!result[0]) {
         throw new Error('Error al insertar datos');
@@ -43,12 +57,12 @@ async function insertLocalidad(params){
 }
 
 async function updateLocalidad(params){
-    const {id, nombre_localidad, id_comuna } = params;
+    const {id_localidad, nombre_localidad, region_localidad, provincia_localidad, comuna_localidad } = params;
     const fecha_modificacion = {fecha_modificacion: new Date()}
 
-    let query = 'UPDATE T_LOCALIDAD SET nombre_localidad = ?, id_comuna = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ? WHERE ID_LOCALIDAD = '+id+'';
+    let query = 'UPDATE T_LOCALIDAD SET nombre_localidad = ?, id_comuna = ?, fecha_modificacion = ?,  usuario_modificacion = ?, vigente = ?, id_region = ?, id_provincia = ? WHERE ID_LOCALIDAD = '+id_localidad+'';
 
-    const result = await pool.query(query,[nombre_localidad, id_comuna, fecha_modificacion.fecha_modificacion, null, 0]);
+    const result = await pool.query(query,[nombre_localidad, comuna_localidad, fecha_modificacion.fecha_modificacion, null, 1, region_localidad, provincia_localidad ]);
 
     if (result[0].affectedRows === 0) {
         return null;
@@ -72,6 +86,7 @@ async function deleteLocalidad(id){
 module.exports = {
     getLocalidad: getLocalidad,
     getLocalidadId: getLocalidadId,
+    getLocalidadIdLocalidad: getLocalidadIdLocalidad,
     insertLocalidad: insertLocalidad,
     updateLocalidad: updateLocalidad,
     deleteLocalidad: deleteLocalidad
