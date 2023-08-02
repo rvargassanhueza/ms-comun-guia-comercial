@@ -3,6 +3,7 @@ require('dotenv').config({ path: 'env.env' });
 const userServices = require('../database/usuario-db');
 const httpStatus = require('http-status');
 const constants = require('../../common/const');
+const {enviarCorreoBienvenida} = require('../../common/sendMail')
 
 let _get = async function (req, res) {
     try {
@@ -50,7 +51,9 @@ let _insert = async function (req, res){
             res.status(httpStatus.CONFLICT).json({ error: 'El usuario o correo electrónico ya existen',code:1 });
           } else {
             res.status(httpStatus.CREATED).json({ message: 'Usuario registrado exitosamente', userId: result });
-          }
+          
+            enviarCorreoBienvenida(email_usuario);
+        }
 
     } catch (err) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: 'Error en el servidor' });
@@ -59,13 +62,7 @@ let _insert = async function (req, res){
 
 let _update = async function (req, res){
     try{
-        // const { objUpdate:{nombre_usuario,
-        //     apellido_usuario,
-        //     descripcion_usuario,
-        //     tipoUsuario,
-        //     id_tipo_usuario,
-        //     email_usuario}} = req.body;
-
+     
         let result = await userServices.updateUser(req.body);
         
         if(result === null){
